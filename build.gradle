@@ -1,0 +1,30 @@
+buildscript {
+    ext.kotlin_version = '1.2.71'
+    repositories {
+        google()
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.2.0'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        jcenter()
+    }
+    ext {
+        buildNumber = (System.env.BITRISE_BUILD_NUMBER ? "$System.env.BITRISE_BUILD_NUMBER" : "1").toInteger()//todo
+        targetSdk = 28
+        minSdk = 14
+        compileSdk = 28
+        buildTools = '28.0.3'
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
