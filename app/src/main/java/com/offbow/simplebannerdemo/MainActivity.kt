@@ -1,4 +1,4 @@
-package com.offbow.simplebanner
+package com.offbow.simplebannerdemo
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
