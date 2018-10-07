@@ -4,8 +4,11 @@ import android.app.Activity
 import android.app.Application
 import android.os.Bundle
 
-class SimpleBanner: Application.ActivityLifecycleCallbacks {
+class SimpleBanner(application: Application): Application.ActivityLifecycleCallbacks {
 
+    init {
+        application.registerActivityLifecycleCallbacks(this)
+    }
     override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {
 
     }
@@ -16,4 +19,10 @@ class SimpleBanner: Application.ActivityLifecycleCallbacks {
     override fun onActivityDestroyed(activity: Activity) {}
     override fun onActivitySaveInstanceState(activity: Activity, outState: Bundle?) {}
     override fun onActivityStopped(activity: Activity?) {}
+
+    companion object {
+        fun init(application: Application) {
+            SimpleBanner(application)
+        }
+    }
 }
