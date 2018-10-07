@@ -1,4 +1,4 @@
-package com.offbow.lib
+package com.offbow.simplebanner
 
 import android.app.Activity
 import android.app.Application
