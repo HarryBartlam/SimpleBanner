@@ -10,28 +10,10 @@ class SimpleBanner: Application.ActivityLifecycleCallbacks {
 
     }
 
-    override fun onActivityPaused(activity: Activity?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun onActivityResumed(activity: Activity?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun onActivityStarted(activity: Activity?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun onActivityDestroyed(activity: Activity?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun onActivitySaveInstanceState(activity: Activity?, outState: Bundle?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun onActivityStopped(activity: Activity?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
+    override fun onActivityPaused(activity: Activity) {}
+    override fun onActivityResumed(activity: Activity) {}
+    override fun onActivityStarted(activity: Activity) {}
+    override fun onActivityDestroyed(activity: Activity) {}
+    override fun onActivitySaveInstanceState(activity: Activity, outState: Bundle?) {}
+    override fun onActivityStopped(activity: Activity?) {}
 }
