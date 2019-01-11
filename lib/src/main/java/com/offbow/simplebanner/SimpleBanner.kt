@@ -2,11 +2,16 @@ package com.offbow.simplebanner
 
 import android.app.Activity
 import android.app.Application
+import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.view.ViewGroup
+import androidx.annotation.ColorInt
 
-class SimpleBanner(application: Application) : Application.ActivityLifecycleCallbacks {
+class SimpleBanner(application: Application,
+                   @ColorInt
+                   var color: Int,
+                   var message: String) : Application.ActivityLifecycleCallbacks {
 
     init {
         application.registerActivityLifecycleCallbacks(this)
@@ -15,7 +20,7 @@ class SimpleBanner(application: Application) : Application.ActivityLifecycleCall
     override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {
         val decorView = activity.window.decorView as ViewGroup
 
-        val simpleBannerView = SimpleBannerView(activity)
+        val simpleBannerView = SimpleBannerView(activity, color, message)
 
         val layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
         decorView.addView(simpleBannerView, layoutParams)
@@ -38,8 +43,16 @@ class SimpleBanner(application: Application) : Application.ActivityLifecycleCall
     override fun onActivityStopped(activity: Activity?) {}
 
     companion object {
-        fun init(application: Application) {
-            SimpleBanner(application)
+        private lateinit var simpleBanner: SimpleBanner
+        fun init(application: Application, @ColorInt color: Int = Color.BLACK, message: String = "") {
+            simpleBanner = SimpleBanner(application, color, message)
+        }
+
+        fun updateContent(@ColorInt color: Int, message: String) {
+            simpleBanner.color = color
+            simpleBanner.message = message
         }
     }
+
+
 }
