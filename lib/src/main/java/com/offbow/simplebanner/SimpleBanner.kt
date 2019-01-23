@@ -10,14 +10,31 @@ import androidx.annotation.ColorInt
 
 class SimpleBanner(application: Application,
                    @ColorInt
-                   var color: Int,
-                   var message: String) : Application.ActivityLifecycleCallbacks {
+                   private var color: Int,
+                   private var message: String) : Application.ActivityLifecycleCallbacks {
 
     init {
         application.registerActivityLifecycleCallbacks(this)
     }
 
+    private var currentActivity: Activity? = null
+
     override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {
+        currentActivity = activity
+        currentActivity?.let {
+            drawBanner(it)
+        }
+    }
+
+    private fun updateBannerContent(@ColorInt color: Int, message: String) {
+        this.color = color
+        this.message = message
+        currentActivity?.let {
+            drawBanner(it)
+        }
+    }
+
+    private fun drawBanner(activity: Activity) {
         val decorView = activity.window.decorView as ViewGroup
 
         val simpleBannerView = SimpleBannerView(activity, color, message)
@@ -42,6 +59,10 @@ class SimpleBanner(application: Application,
     override fun onActivitySaveInstanceState(activity: Activity, outState: Bundle?) {}
     override fun onActivityStopped(activity: Activity?) {}
 
+    private fun destory(){
+        this.currentActivity = null
+    }
+
     companion object {
         private lateinit var simpleBanner: SimpleBanner
         fun init(application: Application, @ColorInt color: Int = Color.BLACK, message: String = "") {
@@ -49,8 +70,11 @@ class SimpleBanner(application: Application,
         }
 
         fun updateContent(@ColorInt color: Int, message: String) {
-            simpleBanner.color = color
-            simpleBanner.message = message
+            simpleBanner.updateBannerContent(color, message)
+        }
+
+        fun destory(application: Application, @ColorInt color: Int = Color.BLACK, message: String = "") {
+            simpleBanner.destory()
         }
     }
 
