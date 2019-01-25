@@ -7,8 +7,9 @@ import android.os.Build
 import android.os.Bundle
 import android.view.ViewGroup
 import androidx.annotation.ColorInt
+import java.lang.ref.WeakReference
 
-class SimpleBanner(application: Application,
+class SimpleBanner(private val application: Application,
                    @ColorInt
                    private var color: Int,
                    private var message: String) : Application.ActivityLifecycleCallbacks {
@@ -17,11 +18,11 @@ class SimpleBanner(application: Application,
         application.registerActivityLifecycleCallbacks(this)
     }
 
-    private var currentActivity: Activity? = null
+    private var currentActivity: WeakReference<Activity?> = WeakReference(null)
 
     override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {
-        currentActivity = activity
-        currentActivity?.let {
+        currentActivity = WeakReference(activity)
+        currentActivity.get()?.let {
             drawBanner(it)
         }
     }
@@ -29,7 +30,7 @@ class SimpleBanner(application: Application,
     private fun updateBannerContent(@ColorInt color: Int, message: String) {
         this.color = color
         this.message = message
-        currentActivity?.let {
+        currentActivity.get()?.let {
             drawBanner(it)
         }
     }
@@ -59,8 +60,9 @@ class SimpleBanner(application: Application,
     override fun onActivitySaveInstanceState(activity: Activity, outState: Bundle?) {}
     override fun onActivityStopped(activity: Activity?) {}
 
-    private fun destory(){
-        this.currentActivity = null
+    private fun destroy(){
+        application.unregisterActivityLifecycleCallbacks(this)
+        currentActivity.clear()
     }
 
     companion object {
@@ -73,10 +75,9 @@ class SimpleBanner(application: Application,
             simpleBanner.updateBannerContent(color, message)
         }
 
-        fun destory(application: Application, @ColorInt color: Int = Color.BLACK, message: String = "") {
-            simpleBanner.destory()
+        fun destroy() {
+            simpleBanner.destroy()
         }
     }
-
 
 }
