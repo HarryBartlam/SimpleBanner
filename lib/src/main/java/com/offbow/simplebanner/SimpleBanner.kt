@@ -58,21 +58,38 @@ class SimpleBanner(private val application: Application,
     override fun onActivitySaveInstanceState(activity: Activity, outState: Bundle?) {}
     override fun onActivityStopped(activity: Activity?) {}
 
-    private fun destroy(){
+    private fun destroy() {
         application.unregisterActivityLifecycleCallbacks(this)
         currentActivity.clear()
     }
 
     companion object {
         private lateinit var simpleBanner: SimpleBanner
+
+        /**
+         * Setups the Simple Banner library
+         *
+         * @param application The Application for the library to attach to.
+         * @param color An Int colour (Default Black).
+         * @param message The message to display (Default "")
+         */
         fun init(application: Application, color: Int = Color.BLACK, message: String = "") {
             simpleBanner = SimpleBanner(application, color, message)
         }
 
-        fun updateContent(color: Int, message: String) {
+        /**
+         * Allows the banner color and message to be updated
+         *
+         * @param color An Int colour (Default Black).
+         * @param message The message to display (Default "")
+         */
+        fun updateContent(color: Int = simpleBanner.color, message: String = simpleBanner.message) {
             simpleBanner.updateBannerContent(color, message)
         }
 
+        /**
+         * Call to destroy the library
+         */
         fun destroy() {
             simpleBanner.destroy()
         }
