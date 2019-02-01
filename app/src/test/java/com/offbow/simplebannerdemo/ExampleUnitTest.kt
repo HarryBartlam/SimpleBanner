@@ -1,4 +1,4 @@
-package com.offbow.simplebanner
+package com.offbow.simplebannerdemo
 
 import org.junit.Test
 
