@@ -6,11 +6,9 @@ import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.view.ViewGroup
-import androidx.annotation.ColorInt
 import java.lang.ref.WeakReference
 
 class SimpleBanner(private val application: Application,
-                   @ColorInt
                    private var color: Int,
                    private var message: String) : Application.ActivityLifecycleCallbacks {
 
@@ -27,7 +25,7 @@ class SimpleBanner(private val application: Application,
         }
     }
 
-    private fun updateBannerContent(@ColorInt color: Int, message: String) {
+    private fun updateBannerContent(color: Int, message: String) {
         this.color = color
         this.message = message
         currentActivity.get()?.let {
@@ -67,11 +65,11 @@ class SimpleBanner(private val application: Application,
 
     companion object {
         private lateinit var simpleBanner: SimpleBanner
-        fun init(application: Application, @ColorInt color: Int = Color.BLACK, message: String = "") {
+        fun init(application: Application, color: Int = Color.BLACK, message: String = "") {
             simpleBanner = SimpleBanner(application, color, message)
         }
 
-        fun updateContent(@ColorInt color: Int, message: String) {
+        fun updateContent(color: Int, message: String) {
             simpleBanner.updateBannerContent(color, message)
         }
 

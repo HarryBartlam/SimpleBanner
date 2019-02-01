@@ -1,17 +1,17 @@
 package com.offbow.simplebanner
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Typeface
 import android.widget.FrameLayout
 import android.widget.TextView
 import android.util.TypedValue
 import android.view.Gravity
-import androidx.annotation.ColorInt
 
+@SuppressLint("ViewConstructor")//
 internal class SimpleBannerView(context: Context,
-                                @ColorInt
-                                var color: Int,
-                                var message: String) : FrameLayout(context) {
+                                color: Int,
+                                message: String) : FrameLayout(context) {
 
     private val bannerTextView = TextView(context)
     private val textViewMargins = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 5f, resources.displayMetrics).toInt()
