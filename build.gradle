@@ -15,6 +15,9 @@ allprojects {
     repositories {
         google()
         jcenter()
+        maven {
+            url  "https://dl.bintray.com/harrybartlam/maven"
+        }
     }
     ext {
         version = '0.1.0'

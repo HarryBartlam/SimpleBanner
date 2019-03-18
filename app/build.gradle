@@ -23,7 +23,8 @@ android {
 }
 
 dependencies {
-    implementation project(':core')
+    debugImplementation 'com.offbow.simplebanner:core:0.1.0'
+    releaseImplementation 'com.offbow.simplebanner:no-op:0.1.0'
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
