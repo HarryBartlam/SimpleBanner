@@ -41,8 +41,8 @@ ext {
     bintrayRepo = ext.btRepo
     bintrayName = ext.btName
     libraryName = bintrayName
-    siteUrl = ext.gitUrl
-    gitUrl = ext.gitSsh
+    siteUrl = ext.siteUrl
+    gitUrl = ext.gitUrl
     libraryVersion = ext.version
     developerId = ext.devId
     developerName = ext.devName

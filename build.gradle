@@ -34,8 +34,8 @@ allprojects {
         devName = 'Harry Bartlam'
         devId = 'harrybartlam'
         devEmail = 'harry@bartlam.co.uk'
+        siteUrl = 'https://github.com/offbow/SimpleBanner'
         gitUrl = 'https://github.com/offbow/SimpleBanner'
-        gitSsh = 'git@github.com:offbow/SimpleBanner.git'
 
         pubGroupId = "com.offbow.simplebanner"
         btRepo = "maven"
