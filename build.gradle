@@ -37,6 +37,9 @@ allprojects {
         gitUrl = 'https://github.com/offbow/SimpleBanner'
         gitSsh = 'git@github.com:offbow/SimpleBanner.git'
 
+        pubGroupId = "com.offbow.simplebanner"
+        btRepo = "maven"
+        btName = "SimpleBanner"
     }
 
     tasks.withType(Javadoc) {//javadoc compiler has issues with kotlin

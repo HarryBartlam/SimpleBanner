@@ -5,9 +5,19 @@ plugins {
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
+ext {
+    publishedGroupId = ext.pubGroupId
+    artifact = 'no-op'
+    libraryDescription = 'The non-operational simple banner libary, for release builds or alike'
+}
+
 android {
     compileSdkVersion(compileSdk)
     buildToolsVersion(buildTools)
+
+    compileOptions {
+        kotlinOptions.freeCompilerArgs += ['-module-name', "$publishedGroupId.$artifact"]
+    }
 
     defaultConfig {
         minSdkVersion(minSdk)
@@ -28,24 +38,15 @@ dependencies {
 }
 
 ext {
-    bintrayRepo = 'maven'
-    bintrayName = 'SimpleBanner'
-
-    publishedGroupId = "com.offbow.simplebanner"
+    bintrayRepo = ext.btRepo
+    bintrayName = ext.btName
     libraryName = bintrayName
-    artifact = 'no-op'
-
-    libraryDescription = 'The non-operational simple banner libary, for release builds or alike'
-
     siteUrl = ext.gitUrl
     gitUrl = ext.gitSsh
-
     libraryVersion = ext.version
-
     developerId = ext.devId
     developerName = ext.devName
     developerEmail = ext.devEmail
-
     licenseName = ext.licenseName
     licenseUrl = ext.licenseUrl
     allLicenses = ext.licenses
