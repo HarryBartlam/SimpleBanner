@@ -15,13 +15,37 @@ allprojects {
     repositories {
         google()
         jcenter()
+        maven {
+            url  "https://dl.bintray.com/harrybartlam/maven"
+        }
     }
     ext {
-        buildNumber = (System.env.BITRISE_BUILD_NUMBER ? "$System.env.BITRISE_BUILD_NUMBER" : "1").toInteger()//todo
-        targetSdk = 28
+        version = '0.1.0'
+        buildNumber = 1
         minSdk = 14
+        targetSdk = 28
         compileSdk = 28
         buildTools = '28.0.3'
+
+        licenseName = 'Apache 2.0'
+        licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0'
+        licenses = ['Apache-2.0']
+
+        devName = 'Harry Bartlam'
+        devId = 'harrybartlam'
+        devEmail = 'harry@bartlam.co.uk'
+        siteUrl = 'https://github.com/offbow/SimpleBanner'
+        gitUrl = 'https://github.com/offbow/SimpleBanner'
+
+        pubGroupId = "com.offbow.simplebanner"
+        btRepo = "maven"
+        btName = "SimpleBanner"
+    }
+
+    tasks.withType(Javadoc) {//javadoc compiler has issues with kotlin
+        excludes = ['**/*.kt']
+        options.addStringOption('Xdoclint:none', '-quiet')
+        options.addStringOption('encoding', 'UTF-8')
     }
 }
 
