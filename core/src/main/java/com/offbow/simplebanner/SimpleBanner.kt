@@ -3,9 +3,12 @@ package com.offbow.simplebanner
 import android.app.Activity
 import android.app.Application
 import android.graphics.Color
+import android.graphics.Rect
 import android.os.Build
 import android.os.Bundle
+import android.view.View
 import android.view.ViewGroup
+import android.view.Window
 import java.lang.ref.WeakReference
 
 class SimpleBanner(private val application: Application,
@@ -43,10 +46,13 @@ class SimpleBanner(private val application: Application,
 
         //Intercept Status bar height for the correct display of banner
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT_WATCH) {
-            decorView.setOnApplyWindowInsetsListener { _, insets ->
-                simpleBannerView.translationY = insets.systemWindowInsetTop.toFloat()
-                decorView.onApplyWindowInsets(insets)
-                return@setOnApplyWindowInsetsListener insets
+            val rect = Rect()
+            decorView.getWindowVisibleDisplayFrame(rect)
+            activity.window.findViewById<View>(Window.ID_ANDROID_CONTENT)?.apply {
+                post {
+                    //The top of the displayable view minus the top for the contents view
+                    simpleBannerView.translationY = (this.top - rect.top).toFloat()
+                }
             }
         }
     }
